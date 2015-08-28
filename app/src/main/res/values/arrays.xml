@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="titles" >
+        <item>
+            Getting Started \n
+            Getting Started \n
+            Getting Started \n
+            Getting Started \n
+        </item>
+        <item>Building Your First App</item>
+        <item>Building Your First App</item>
+        <item>Supporting Different Devices</item>
+    </string-array>
+
+    <string-array name="descriptions">
+        <item>Welcome to Training for Android developers. Here you\ll find sets of lessons within classes that describe how to accomplish a specific task with code samples you can re-use in your app. Classes are organized into several groups you can see at the top-level of the left navigation.</item>
+        <item>This class teaches you how to build your first Android app. Youll learn how to create an Android project and run a debuggable version of the app. Youll also learn some fundamentals of Android app design, including how to build a simple user interface and handle user input.</item>
+        <item>The action bar is one of the most important design elements you can implement for your apps activities. It provides several user interface features that make your app immediately familiar to users by offering consistency between other Android apps. Key functions include:</item>
+        <item>Android devices come in many shapes and sizes all around the world. With a wide range of device types, you have an opportunity to reach a huge audience with your app. In order to be as successful as possible on Android, your app needs to adapt to various device configurations. Some of the important variations that you should consider include different languages, screen sizes, and versions of the Android platform.</item>
+    </string-array>
+</resources>
