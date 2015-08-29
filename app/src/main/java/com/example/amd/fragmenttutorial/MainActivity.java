@@ -2,27 +2,23 @@ package com.example.amd.fragmenttutorial;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Intent;
+import android.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends Activity implements FragmentA.Communicator {
+public class MainActivity extends AppCompatActivity {
 
-    FragmentA fragmentA;
-    FragmentB fragmentB;
     FragmentManager fragmentManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.e("ANAS", "On Create Activity");
         fragmentManager = getFragmentManager();
-        fragmentA = (FragmentA) fragmentManager.findFragmentById(R.id.fragment);
-        fragmentA.setCommunicator(this);
-
-
     }
 
     @Override
@@ -47,16 +43,67 @@ public class MainActivity extends Activity implements FragmentA.Communicator {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void respond(int index) {
-        fragmentB = (FragmentB) fragmentManager.findFragmentById(R.id.fragment2);
-        if(fragmentB!=null && fragmentB.isVisible()){
-            fragmentB.changeData(index);
+    public void addA(View view) {
+        FragmentA fragmentA = new FragmentA();
+        if(fragmentManager.findFragmentByTag("Fragment A")!=null &&
+                fragmentManager.findFragmentByTag("Fragment A").isVisible() ){
+            Toast.makeText(this, "A is already added ", Toast.LENGTH_SHORT).show();
         }else {
-            Intent intent = new Intent(this, AnotherActivity.class);
-            intent.putExtra("index", index);
-            startActivity(intent);
-
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.group, fragmentA, "Fragment A");
+            transaction.commit();
         }
+    }
+
+    public void removeA(View view) {
+        FragmentA fragmentA= (FragmentA) fragmentManager.findFragmentByTag("Fragment A");
+        if(fragmentA!=null) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.remove(fragmentA);
+            transaction.commit();
+        }
+        else {
+            Toast.makeText(this, "A is not yet Added to be removed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void replaceAwithB(View view) {
+        FragmentB fragmentB = new FragmentB();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.group, fragmentB, "Fragment B");
+        transaction.commit();
+    }
+
+    public void addB(View view) {
+        FragmentB fragmentB = new FragmentB();
+        if(fragmentManager.findFragmentByTag("Fragment B")!=null && fragmentManager.findFragmentByTag("Fragment B").isVisible()){
+            Toast.makeText(this, "B is already added ", Toast.LENGTH_SHORT).show();
+        }else {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.add(R.id.group, fragmentB, "Fragment B");
+            transaction.commit();
+        }
+
+    }
+
+    public void removeB(View view) {
+        FragmentB fragmentB= (FragmentB) fragmentManager.findFragmentByTag("Fragment B");
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        if(fragmentB!=null) {
+            transaction.remove(fragmentB);
+            transaction.commit();
+        }
+        else {
+            Toast.makeText(this, "B is not yet Added to be removed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void replceBwithA(View view) {
+    }
+
+    public void attachA(View view) {
+    }
+
+    public void detachB(View view) {
     }
 }
